@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import "../styles/index.css"
+import axios from "axios"
 
 import Layout from '../components/Layout'
 import Card from '../components/Card'
 import Loading from '../components/Loading'
+import {ButtonPage} from '../components/Button'
 
 
 class Favorites extends Component {
@@ -13,6 +15,7 @@ class Favorites extends Component {
     datas : [],
     skeleton : [1,2,3,4,5,6,7,8,9,10],
     loading : true,
+    page : 1,
   }
 
   componentDidMount() {
@@ -20,25 +23,21 @@ class Favorites extends Component {
   }
 
   fetchData() {
-    this.setState( {loading: true })
-    let dataTemp = []
-    for (let i = 0; i < 10; i ++) {
-      const temp = {
-        id : i + 1,
-        title : `FILM # ${i + 1}`,
-        click : "Watch Now",
-        favorite : "Favorites",
-        image : "https://upload.wikimedia.org/wikipedia/id/4/40/Batmanlee.png",
-      }
-      dataTemp.push(temp)
-    }
-    setTimeout(() => {
-      this.setState({
-        loading : false,
-        datas : dataTemp,
-        title : "Welcome",
-      })
-    }, 2000);
+    this.setState({ loading : true })
+    axios.get(`https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`)
+    .then((res) => {
+      const { results } = res.data
+      const newPage = this.state.page + 1
+      const temp = [...this.state.datas]
+      temp.push(...results)
+      this.setState({datas : temp})
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+    .finally(() => {
+      this.setState({loading : false})
+    })
   }
 
   render() {
@@ -55,10 +54,10 @@ class Favorites extends Component {
           : this.state.datas.map((data) => (
             <Card 
             key={data.id}
-            image={data.image}
+            image={data.poster_path}
             title={data.title}
-            click={data.click}
-            favorite={`Remove from ${data.favorite}`}
+            click={"Watch Now"}
+            favorite={`Remove from Favorite`}
             />
           ))}
           </div>

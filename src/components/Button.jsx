@@ -16,4 +16,15 @@ class ButtonFavorite extends Component {
   }
 }
 
-export {ButtonFavorite , ButtonWatch}
+
+class ButtonPage extends Component {
+  render() {
+    return (
+      <button className='bg-white text-black w-full h-10 rounded-lg shadow-lg items-center' onClick={this.props.onClick}>{this.props.label}</button>
+    )
+  }
+}
+
+
+
+export {ButtonFavorite, ButtonPage, ButtonWatch}
