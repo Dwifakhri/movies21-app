@@ -1,73 +1,61 @@
-import React, { Component } from 'react'
-import "../styles/index.css"
+import React, { useState, useEffect } from 'react'
+import "styles/index.css"
+import axios from 'axios'
 
-import Layout from '../components/Layout'
-import Box from '../components/Box'
+import { WithRouter } from 'utils/Navigation'
+import { useTitle } from 'utils/useTitle'
+
+import Layout from 'components/Layout'
+import Box from 'components/Box'
+import Loading from 'components/Loading'
 
 
-export class Details extends Component {
+function Details(props) {
+  const [data, setData] = useState({})
+  const [loading, setLoading] =useState(true)
 
-  state = {
-    title : "Welcome",
-    datas : [],
-    skeleton : [1],
-    loading : true,
+  useTitle(data.title)
+
+useEffect(() => {
+  fetchData()
+}, []) 
+
+ function fetchData() {
+    const { id_movie } = props.params
+    axios
+    .get(`https://api.themoviedb.org/3/movie/${id_movie}?api_key=${process.env.REACT_APP_TMDB_KEY}`)
+    
+    .then((res) => {
+      const { data } = res
+      setData(data)
+
+    })
+    .catch((err) => {
+      alert(err.tooString())
+    })
+    .finally(() => {
+      setLoading(false)
+    })
   }
 
-  componentDidMount() {
-    this.fetchData()
-  }
-
-  fetchData() {
-    this.setState( {loading: true })
-    let dataTemp = []
-    for (let i = 0; i < 1; i ++) {
-      const temp = {
-        id : i + 1,
-        title : `FILM # ${i + 1}`,
-        click : "Watch Now",
-        favorite : "Favorites",
-        image : "https://upload.wikimedia.org/wikipedia/id/4/40/Batmanlee.png",
-        country : "America",
-        genre : "Action",
-        duration : "150 Minutes",
-        director : "Willy Wonka",
-        synopsis : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio, fugiat? Voluptates soluta illum aspernatur cum? Voluptas minima at illo esse beatae fugit hic accusantium. Totam nam asperiores dolor, facere adipisci animi quo sapiente harum nobis eos similique explicabo soluta sequi doloremque eum! Nostrum eos nam voluptatem asperiores voluptas dolor unde",
-
-      }
-      dataTemp.push(temp)
-    }
-    setTimeout(() => {
-      this.setState({
-        loading : false,
-        datas : dataTemp,
-        title : "Welcome",
-      })
-    }, 2000);
-  }
-
-  render() {
     return (
       <Layout>
-        <div className='px-5 py-5'>
-        {this.state.datas.map((data) => (
+         <div className='px-2'>
             <Box 
             key={data.id}
-            image={data.image}
+            image={data.poster_path}
+            backdrop={data.backdrop_path}
             title={data.title}
-            click={data.click}
-            favorite={`Add to ${data.favorite}`}
-            duration={data.duration}
-            genre={data.genre}
-            director={data.director}
-            country={data.country}
-            synopsis={data.synopsis}
-            ></Box>
-        ))}
+            date={data.release_date}
+            language={data.original_language}
+            vote={data.vote_average}
+            overview={data.overview}
+            addremove={"Add to"}
+            />
         </div>
       </Layout>
     )
-  }
+  
 }
 
-export default Details
+export default WithRouter(Details)

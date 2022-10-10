@@ -1,7 +1,6 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 
-class Loading extends Component {
-  render() {
+function Loading (props) {
     return (
         <div className="grow m-2 p-3 flex flex-col justify-between">
         <div className="animate-pulse flex space-x-4">
@@ -15,7 +14,7 @@ class Loading extends Component {
         </div>
       </div>
     )
-  }
+  
 }
 
 export default Loading
