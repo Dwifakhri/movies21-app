@@ -4,13 +4,13 @@ import {ButtonWatch , ButtonFavorite} from './Button'
 
 function Box (props) {
     return (
-      <div className='-z-10 absolute w-full h-screen left-0 right-0'> 
-      <img className='-z-20 absolute object-contain left-0 right-0' src={`https://image.tmdb.org/t/p/original${props.backdrop}`} alt={props.title} />
-      <div className='flex flex-col md:flex-row lg:flex-row lg:justify-evenly lg:px-10 py-0 px-2 mt-10'>
+      <div className='relative bg-cover bg-center' style={{backgroundImage:`linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 2)), url(https://image.tmdb.org/t/p/original${props.backdrop})`}}> 
+      
+      <div className='flex flex-col md:flex-row lg:flex-row lg:justify-evenly lg:px-10 py-0 px-2'>
         <div className='flex flex-row'>
-            <img className='justify-center ' src={`https://image.tmdb.org/t/p/w400${props.image}`} alt={props.title} />
+            <img className='justify-center px-5 py-5' src={`https://image.tmdb.org/t/p/w400${props.image}`} alt={props.title} />
         </div>
-        <div className='text-black py-5 px-5 bg-white bg-opacity-60'>
+        <div className='text-black dark:text-white py-5 px-5 bg-white dark:bg-black bg-opacity-60 my-5'>
             <a className='text-5xl md:text-3xl'>{props.title}</a>
             <ul className='py-5 text-xl leading-6 flex flex-row space-x-5'>
                 <div>

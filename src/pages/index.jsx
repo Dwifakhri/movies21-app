@@ -69,7 +69,7 @@ function handleFav(movie){
 
     return (
       <Layout>
-          <div className='text-black font-light text-7xl text-center py-5'>
+          <div className='text-black dark:text-white font-light text-7xl text-center py-5'>
               <p>NOW PLAYING</p>
           </div> 
           <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mx-4 my-2 py-5'>

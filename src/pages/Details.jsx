@@ -40,7 +40,7 @@ useEffect(() => {
 
     return (
       <Layout>
-         <div className='px-2'>
+         <div>
             <Box 
             key={data.id}
             image={data.poster_path}
