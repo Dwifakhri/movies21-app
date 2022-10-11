@@ -10,7 +10,7 @@ function Box (props) {
         <div className='flex flex-row'>
             <img className='justify-center px-5 py-5' src={`https://image.tmdb.org/t/p/w400${props.image}`} alt={props.title} />
         </div>
-        <div className='text-black dark:text-white py-5 px-5 bg-white dark:bg-black bg-opacity-60 my-5'>
+        <div className='text-black dark:text-white py-5 px-5 bg-white dark:bg-black bg-opacity-60 dark:bg-opacity-60 my-5'>
             <a className='text-5xl md:text-3xl'>{props.title}</a>
             <ul className='py-5 text-xl leading-6 flex flex-row space-x-5'>
                 <div>
@@ -19,7 +19,7 @@ function Box (props) {
                 <li>Language</li>
                 <li>Rating</li>
                 </div>
-                <div className='font-normal text-black'>
+                <div className='font-normal'>
                 <div>: {props.title}</div>
                 <div>: {props.date}</div>
                 <div>: {props.language}</div>

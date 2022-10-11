@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import {useDispatch} from 'react-redux'
 import "styles/index.css"
 import axios from "axios"
 import swal from 'sweetalert'
@@ -10,11 +11,13 @@ import Layout from 'components/Layout'
 import Card from 'components/Card'
 import Loading from 'components/Loading'
 import {ButtonPage} from 'components/Button'
+import { setFavorites } from 'utils/redux/reducers/reducers'
 
 
 function App (props) {
 
-const [title] = useState("Welcome")
+const dispatch = useDispatch()
+const [title] = useState("")
 const [datas, setDatas] = useState([])
 const [skeleton] = useState([1,2,3,4,5,6,7,8,9,10])
 const [loading, setLoading] = useState(true)
@@ -58,11 +61,13 @@ function handleFav(movie){
     } else {
       parsedMovies.push(movie)
     const temp = JSON.stringify(parsedMovies)
+    dispatch(setFavorites(parsedMovies))
     localStorage.setItem("favMovies", temp)
 
     }
   } else {
   const temp = JSON.stringify([movie])
+  dispatch(setFavorites([movie]))
   localStorage.setItem("favMovies", temp)
   }
 }
