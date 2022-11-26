@@ -1,52 +1,50 @@
-import React, { useEffect, useState, useMemo } from 'react'
-import { BrowserRouter, Routes, Route} from "react-router-dom"
-import { useDispatch } from 'react-redux'
-import { setFavorites } from 'utils/redux/reducers/reducers'
+import React, { useEffect, useState, useMemo } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setFavorites } from "utils/redux/reducers/reducers";
 
-import Home from "pages"
-import Details from "pages/Details"
-import Favorites from "pages/Favorites"
-import Search from 'pages/Search'
+import Home from "pages";
+import Details from "pages/Details";
+import Favorites from "pages/Favorites";
+import Search from "pages/Search";
 
-import { ThemeContext } from 'utils/context'
+import { ThemeContext } from "utils/context";
 
-function App(){
-  const dispatch = useDispatch()
-  const [isLight, setIsLight] = useState("theme")
-  const theme = useMemo(() => ({isLight, setIsLight}), [isLight])
+function App() {
+  const dispatch = useDispatch();
+  const [isLight, setIsLight] = useState("theme");
+  const theme = useMemo(() => ({ isLight, setIsLight }), [isLight]);
 
   useEffect(() => {
     if (isLight) {
-      localStorage.setItem("theme", "dark")
-      document.documentElement.classList.remove("dark")
-
+      localStorage.setItem("theme", "dark");
+      document.documentElement.classList.remove("dark");
     } else {
-      localStorage.setItem("theme", "light")
-      document.documentElement.classList.add("dark")
+      localStorage.setItem("theme", "light");
+      document.documentElement.classList.add("dark");
     }
-  }, [isLight])
+  }, [isLight]);
 
   useEffect(() => {
-    const getMovies = localStorage.getItem("favMovies")
+    const getMovies = localStorage.getItem("favMovies");
     if (getMovies) {
-      dispatch(setFavorites(JSON.parse(getMovies)))
+      dispatch(setFavorites(JSON.parse(getMovies)));
     }
-  }, [])
+  }, []);
 
-    return (
-      <ThemeContext.Provider value={theme}>
-        <BrowserRouter>
-          <Routes>
-            <Route path='/' element={<Home/>} />
-            <Route path='/detail/:id_movie' element={<Details/>} />
-            <Route path='/favorites' element={<Favorites/>} />
-            <Route path='/search/:title_movie' element={<Search/>}></Route>
-            <Route path='*' element={<div>404 Error Not Found</div>}/>
-          </Routes>
-        </BrowserRouter>
-      </ThemeContext.Provider>
-    )
-  }
+  return (
+    <ThemeContext.Provider value={theme}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/detail/:id_movie" element={<Details />} />
+          <Route path="/favorites" element={<Favorites />} />
+          <Route path="/search/:searchValue" element={<Search />} />
+          <Route path="*" element={<div>404 Error Not Found</div>} />
+        </Routes>
+      </BrowserRouter>
+    </ThemeContext.Provider>
+  );
+}
 
-
-export default App
+export default App;
