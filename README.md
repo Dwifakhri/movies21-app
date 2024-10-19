@@ -32,7 +32,7 @@ Use the following command to deploy the Mymovies-app, run the tests and launch t
 
 ```
 git clone https://github.com/Dwifakhri/movies21-app.git
-cd pokemon-app
+cd movies21-app
 ```
 
 Run the following commands to install the required NPM packages:
