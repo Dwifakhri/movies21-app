@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ButtonWatch, ButtonFavorite } from "./Button";
+import {  ButtonFavorite } from "./Button";
 
 function Box(props) {
   return (
@@ -19,7 +19,7 @@ function Box(props) {
           />
         </div>
         <div className="text-black dark:text-white py-5 px-5 bg-white dark:bg-black bg-opacity-60 dark:bg-opacity-60 my-5">
-          <a className="text-5xl md:text-3xl">{props.title}</a>
+          <p className="text-5xl md:text-3xl">{props.title}</p>
           <ul className="py-5 text-xl leading-6 flex flex-row space-x-5">
             <div>
               <li>Original Title</li>

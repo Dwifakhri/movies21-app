@@ -15,7 +15,7 @@ function Search(props) {
   const [page, setPage] = useState(1);
   const [skeleton] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
   const [loading, setLoading] = useState(false);
-  const [movieId, setMovieId] = useState(0);
+  const [ movieId,setMovieId] = useState(0);
   const [trailer, setTrailer] = useState({});
   const [appear, setAppear] = useState(false);
 
@@ -95,7 +95,7 @@ function Search(props) {
       <div className="text-black  dark:text-white font-light text-7xl text-center py-5">
         <p>SEARCHING</p>
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mx-4 my-2 py-5">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 mx-4 my-2 py-5">
         {loading
           ? skeleton.map((item) => <Loading key={item} />)
           : movies.map((data) => (

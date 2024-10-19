@@ -9,14 +9,15 @@ import Favorites from "pages/Favorites";
 import Search from "pages/Search";
 
 import { ThemeContext } from "utils/context";
+import { light } from "@mui/material/styles/createPalette";
 
 function App() {
   const dispatch = useDispatch();
-  const [isLight, setIsLight] = useState("theme");
+  const [isLight, setIsLight] = useState(localStorage.getItem("theme") === 'light');
   const theme = useMemo(() => ({ isLight, setIsLight }), [isLight]);
 
-  useEffect(() => {
-    if (isLight) {
+  useEffect(() => {        
+    if (!isLight) {
       localStorage.setItem("theme", "dark");
       document.documentElement.classList.remove("dark");
     } else {

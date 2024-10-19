@@ -3,7 +3,7 @@ import { ButtonWatch, ButtonFavorite } from "./Button";
 
 function Card(props) {
   return (
-    <div className="dark:bg-black flex flex-col justify-center p-4 shadow-lg rounded-lg border border-gray-200 dark:border-none hover:scale-110">
+    <div className="dark:bg-black flex flex-col justify-center p-4 shadow-lg rounded-lg border border-gray-200 dark:border-none md:hover:scale-110">
       <div className="h-full w-full cursor-pointer" onClick={props.onNavigate}>
         <img
           src={`https://image.tmdb.org/t/p/w500/${props.image}`}
